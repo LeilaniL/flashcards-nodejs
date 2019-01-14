@@ -1,26 +1,15 @@
 
-export class HungryBear {
+import $ from 'jquery';
+import { Card } from './card';
+import { Game } from './game';
 
-    constructor(name) {
-      this.name = name;
-      this.foodLevel = 10;
-    }
-  
-    setHunger() {
-      setInterval(() => {
-        this.foodLevel--;
-      }, 1000);
-    }
+$(document).ready(function () {
 
-    didYouGetEaten() {
-      if (this.foodLevel > 0) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-  
-    feed() {
-      this.foodLevel = 10;
-    }
-  }
+    $("#userForm").submit(function (event) {
+        event.preventDefault();
+        const userName = $('#userName').val();
+
+        let newGame = new Game(userName);
+
+    })
+});
