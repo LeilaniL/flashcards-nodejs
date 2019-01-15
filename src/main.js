@@ -1,6 +1,5 @@
 
 import $ from 'jquery';
-import { Card } from './card';
 import { Game } from './game';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,29 +11,39 @@ $(document).ready(function () {
         const userName = $('#userName').val();
         let newGame = new Game(userName);
 
-// display first card question
 
-        $("#card").text(newGame.newCard.definition);
+            let showNewCard = function() {
+                // display card question
+                $("#card").text(newGame.newCard.definition);
+                //start timer
+                newGame.setTimer();
+                //print time to page
+                setInterval(function(){
+                    $("#timer").text(`Time Remaining: ${newGame.time}`);
+                    if (newGame.time<=0){
+                        newGame.timeOut();
+                        $("#score").text(`Time's up!! New score is ${newGame.score}`);
+                        newGame.clearTimer();
+                        showNewCard();
+                    }
+                }, 1000);
+            
+                // submit and check answer
+                $("#answerForm").submit(function (event) {
+                    event.preventDefault();
+                    let userAnswer = $('#answer').val();
+                    $("#answerForm").off("submit")
+                    let finalResult = newGame.checkCard(userAnswer);
+                    newGame.clearTimer();
+                    $("#score").text(finalResult + newGame.score);
+                    showNewCard();
+                })
+            }
 
-        newGame.setTimer();
-        
-        //print time to page
-        setInterval(function(){
-            $("#timer").text(`Time Remaining: ${newGame.time}`);
-        }, 1000);
-             
-        // submit and check answer
-        $("#answerForm").submit(function (event) {
-            event.preventDefault();
-            let userAnswer = $('#answer').val();
-            $("#answerForm").off("submit")
-            let finalResult = newGame.checkCard(userAnswer);
-            $("#score").text(finalResult + newGame.score);
-            // display next card question
-            $("#card").text(newGame.newCard.definition);
+        showNewCard();
+           
 
-
-        })
+    
 
     });
 });

@@ -16,13 +16,18 @@ export class Game {
     return this.score++;
   }
 
-  lowerScore() {
-    return this.score--;
+  timeOut() {
+    this.score--;
+    this.time=10;
+    this.cardNumber++;
+    this.newCard = Card.cardCreater(this.cardNumber);
   }
+  
   setTimer() {
     interval = setInterval(() => {
       if (this.time > 0) {
         this.time--;
+        console.log("Set Timer:" + this.time);
       } else {
         this.score--;
       }
@@ -31,24 +36,28 @@ export class Game {
 
   clearTimer() {
     clearInterval(interval);
+    console.log("timer cleared");
   }
 
+
+
+
   checkCard (userAnswer) {
-  let answerResult = "";
   let isCorrect = this.newCard.testAnswer(userAnswer);
   if (isCorrect === true) {
       this.raiseScore();
       this.cardNumber++;
-      this.clearTimer();
       this.newCard = Card.cardCreater(this.cardNumber);
-      return answerResult = "Correct! New Score is ";
+      this.time=10;
+      return "Correct! New Score is ";
+      
   }
   else {
-      this.lowerScore();
+      this.score--;
       this.cardNumber++;
-      this.clearTimer();
       this.newCard = Card.cardCreater(this.cardNumber);
-      return answerResult = "Incorrect! New Score is ";
+      this.time=10;
+      return "Incorrect! New Score is ";
   }
 }
 
