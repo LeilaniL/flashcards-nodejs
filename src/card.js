@@ -1,12 +1,15 @@
+import $ from 'jquery';
+
 let cardWords = ["javascript", "webpack", "javascript"];
 let cardDefinitions = ["language we're learning now", "a module bundler used instead of Gulp.js or Grunt.js", "language we're learning now(repeat)"];
+let interval; 
 
 export class Card {
 
   constructor(word, definition) {
     this.word = word;
     this.definition = definition;
-    // this.time = 10;
+    this.time = 10;
   }
 
   static cardCreater(x) {
@@ -14,23 +17,24 @@ export class Card {
     return newCard;
   }
 
-  // setTimer() {
-  //     interval = setInterval(() => {
-  //         this.time--;
-  //     }, 1000);        
-  // }
+  setTimer() {
+      interval = setInterval(() => {
+          this.time--;
+          $("#timer").text(`Time Remaining: ${this.time}`);
+      }, 1000);        
+  }
 
-  // clearTimer() {
-  //     clearInterval(interval);
-  // }
+  clearTimer() {
+      clearInterval(interval);
+  }
 
-  // timesUp() {
-  //   if (this.time > 0) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
+  timesUp() {
+    if (this.time > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   testAnswer(userAnswer) {
     if (this.word === userAnswer) {

@@ -16,33 +16,30 @@ $(document).ready(function () {
         function answerFunction() {
             let newCard = Card.cardCreater(x);
             $("#card").text(newCard.definition);
+            newCard.setTimer();
             $("#answerForm").submit(function (event) {
-                console.log("answerForm submitted");
                 event.preventDefault();
                 let userAnswer = $('#answer').val();
                 $("#answerForm").off("submit")
-                console.log("userAnswer: " + userAnswer);
-                console.log("x:" + x);
+                
                 let isCorrect = newCard.testAnswer(userAnswer);
                 if (isCorrect === true) {
-                    console.log('correct answer');
                     newGame.raiseScore();
-                    console.log(`new score is ${newGame.score}`);
+                    $("#score").text(`Correct! new score is ${newGame.score}`);
                     x++;
+                    newCard.clearTimer();
                     answerFunction();
                 }
                 else if (isCorrect === false) {
-                    console.log('incorrect answer');
                     newGame.lowerScore();
-                    console.log(`new score is ${newGame.score}`);
+                    $("#score").text(`Incorrect :(  New score is ${newGame.score}`);
                     x++;
+                    newCard.clearTimer();
                     answerFunction();
                 }
                 else {
                     return;
                 }
-
-                console.log(x)
             })
         }
 

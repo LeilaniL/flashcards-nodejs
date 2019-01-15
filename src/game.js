@@ -1,3 +1,4 @@
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
 
 export class Game {
@@ -8,14 +9,18 @@ export class Game {
     }
   
     raiseScore() {
-        return this.score++;        
+      return this.score++;        
     }
 
     lowerScore() {
-        return this.score--;
+      return this.score--;
     }
 
-    
+    // play() {
+    //   let x = 0;
+    //   let newCard = Card.cardCreater(x);
+    //   $("#card").text(newCard.definition);
+    // }
 
     didYouWinGame() {
       if (this.score > 10) {
