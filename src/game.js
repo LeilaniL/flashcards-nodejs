@@ -15,6 +15,8 @@ export class Game {
         return this.score--;
     }
 
+    
+
     didYouWinGame() {
       if (this.score > 10) {
         return true;

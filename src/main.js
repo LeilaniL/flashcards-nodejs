@@ -12,6 +12,7 @@ $(document).ready(function () {
         let newGame = new Game(userName);
         let x = 0;
 
+        
         function answerFunction() {
             let newCard = Card.cardCreater(x);
             $("#card").text(newCard.definition);
@@ -19,6 +20,7 @@ $(document).ready(function () {
                 console.log("answerForm submitted");
                 event.preventDefault();
                 let userAnswer = $('#answer').val();
+                $("#answerForm").off("submit")
                 console.log("userAnswer: " + userAnswer);
                 console.log("x:" + x);
                 let isCorrect = newCard.testAnswer(userAnswer);
