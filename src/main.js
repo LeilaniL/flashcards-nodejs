@@ -36,10 +36,11 @@ $(document).ready(function () {
                     let finalResult = newGame.checkCard(userAnswer);
                     newGame.clearTimer();
                     $("#score").text(finalResult + newGame.score);
+                    // show images API
                     if(newGame.didYouWinGame() === true) {
                         $(".img").show();
                         $.ajax({
-                                url: `https://api.giphy.com/v1/stickers/random?api_key=eA4oR2RUdVtaS1l8xJ1UtQaJs6JeItIz&tag=&rating=PG&limit=1`,
+                                url: `https://api.giphy.com/v1/stickers/random?api_key=APIKEY&tag=&rating=PG&limit=1`,
                                 type: 'GET',
                                 data: {
                                   format: 'json'
