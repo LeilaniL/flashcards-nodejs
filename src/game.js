@@ -1,6 +1,6 @@
 import { Card } from './card.js';
 let x = 0;
-let interval;
+
 
 export class Game {
 
@@ -10,6 +10,7 @@ export class Game {
     this.newCard = Card.cardCreater(this.cardNumber);
     this.time = 10;
     this.score = 0;
+    this.interval = null;
   }
 
   raiseScore() {
@@ -24,7 +25,7 @@ export class Game {
   }
   
   setTimer() {
-    interval = setInterval(() => {
+    this.interval = setInterval(() => {
       if (this.time > 0) {
         this.time--;
         console.log("Set Timer:" + this.time);
@@ -35,12 +36,9 @@ export class Game {
   }
 
   clearTimer() {
-    clearInterval(interval);
-    console.log("timer cleared");
+    console.log(this.interval);
+    clearInterval(this.interval);
   }
-
-
-
 
   checkCard (userAnswer) {
   let isCorrect = this.newCard.testAnswer(userAnswer);
@@ -63,10 +61,12 @@ export class Game {
 
   didYouWinGame() {
     if (this.score >=2) {
+      this.clearTimer();
       return true;
     } else {
       return false;
     }
+    
   }
 
 

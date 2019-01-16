@@ -40,7 +40,7 @@ $(document).ready(function () {
                     if(newGame.didYouWinGame() === true) {
                         $(".img").show();
                         $.ajax({
-                                url: `https://api.giphy.com/v1/stickers/random?api_key=APIKEY&tag=&rating=PG&limit=1`,
+                                url: `https://api.giphy.com/v1/stickers/random?api_key=eA4oR2RUdVtaS1l8xJ1UtQaJs6JeItIz&tag=&rating=PG&limit=1`,
                                 type: 'GET',
                                 data: {
                                   format: 'json'
@@ -53,9 +53,13 @@ $(document).ready(function () {
                                 error: function () {
                                   $('#errors').text("There was an error processing your request. Please try again.");
                                 }
-                              });
-                    }
-                    showNewCard();
+                              });  
+                        }
+                        else{
+                            showNewCard();
+                        }
+                    
+
                 })
             }
 
