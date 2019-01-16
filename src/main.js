@@ -2,6 +2,7 @@
 import $ from 'jquery';
 import { Game } from './game';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles.css';
 
 
 $(document).ready(function () {
@@ -10,7 +11,6 @@ $(document).ready(function () {
         event.preventDefault();
         const userName = $('#userName').val();
         let newGame = new Game(userName);
-
 
             let showNewCard = function() {
                 // display card question
@@ -36,6 +36,24 @@ $(document).ready(function () {
                     let finalResult = newGame.checkCard(userAnswer);
                     newGame.clearTimer();
                     $("#score").text(finalResult + newGame.score);
+                    if(newGame.didYouWinGame() === true) {
+                        $(".img").show();
+                        $.ajax({
+                                url: `https://api.giphy.com/v1/stickers/random?api_key=eA4oR2RUdVtaS1l8xJ1UtQaJs6JeItIz&tag=&rating=PG&limit=1`,
+                                type: 'GET',
+                                data: {
+                                  format: 'json'
+                                },
+                                success: function (response) {
+                                  document.getElementById("test").src = response.data.images.original.url;
+                            
+                                
+                                },
+                                error: function () {
+                                  $('#errors').text("There was an error processing your request. Please try again.");
+                                }
+                              });
+                    }
                     showNewCard();
                 })
             }
@@ -47,86 +65,3 @@ $(document).ready(function () {
 
     });
 });
-    
-
-            //     newGame.newCard.checkCard(userAnswer)
-
-//                 // let isCorrect = newCard.testAnswer(userAnswer);
-//                 // if (isCorrect === true) {
-//                 //     newGame.raiseScore();
-//                 //     $("#score").text(`Correct! new score is ${newGame.score}`);
-//                 //     x++;
-//                 //     newCard.clearTimer();
-//                 //     answerFunction();
-//                 // }
-//                 // else {
-//                 //     newGame.lowerScore();
-//                 //     $("#score").text(`Incorrect :(  New score is ${newGame.score}`);
-//                 //     x++;
-//                 //     newCard.clearTimer();
-//                 //     answerFunction();
-//                 // }
-//             })
-//         }
-
-//         answerFunction();
-
-
-
-
-
-//         // let flashcards = function () {
-//         //initialize new card, print definition
-
-
-//         //print time to time div every second and lower score if time's up
-//         // let interval;
-//         // let time = 10;
-//         // function countdown() {
-//         //     interval = setInterval(() => {
-//         //         time-=1;
-//         //         $("#timer").text(time);
-//         //         if (time <= 0) {
-//         //             console.log('times up');
-//         //             clearInterval(interval);
-//         //             newGame.lowerScore();
-//         //             x+=1;
-//         //             console.log(`new score is ${newGame.score}`)
-//         //         }
-
-//         //     }, 1000);
-//         // }
-
-//         // countdown();
-
-//         // setTimeout(() => {
-//         //     console.log("I timed out");
-//         //     clearInterval(interval);
-//         // }, 10001);
-//         // function addToX() {
-//         //     console.log(x);
-//         //     newCard.word = cardAnswers[x];
-//         //     newCard.definition = cardDefinitions[x];
-//         //     $("#card").text(newCard.definition);
-//         // }
-//         // $("button#test").click(addToX());
-
-//         // })
-//         // })
-//         // let userAnswer = $('#answer').val();
-//         // let isCorrect = newCard.testAnswer(userAnswer);
-//         // if (isCorrect === true) {
-//         //     console.log('correct answer');
-//         //     newGame.raiseScore();
-//         //     console.log(`new score is ${newGame.score}`);
-//         //     x++;
-//         //     //clearInterval(interval);
-//         // }
-//         // else {
-//         //     console.log('incorrect answer');
-//         //     newGame.lowerScore();
-//         //     x++;
-//         //     //clearInterval(interval);
-//         // }
-
-//     })

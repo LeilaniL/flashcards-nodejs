@@ -62,7 +62,7 @@ export class Game {
 }
 
   didYouWinGame() {
-    if (this.score > 10) {
+    if (this.score >=2) {
       return true;
     } else {
       return false;
